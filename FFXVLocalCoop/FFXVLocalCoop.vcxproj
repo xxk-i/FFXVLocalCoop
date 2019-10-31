@@ -163,6 +163,7 @@
     <ClInclude Include="ActorManager.h" />
     <ClInclude Include="ActorPadControlComponent.h" />
     <ClInclude Include="ActorReference.h" />
+    <ClInclude Include="Black.h" />
     <ClInclude Include="D3D11Display.h" />
     <ClInclude Include="FunctionHooks.h" />
     <ClInclude Include="FunctionImports.h" />

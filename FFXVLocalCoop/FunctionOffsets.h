@@ -28,6 +28,8 @@ __int64 offOnSelectPlayerChangeMenu = 0x8BEF10;
 __int64 offSetMouseCursorVisible = 0x2F851E0;
 __int64 offSetMouseCursorState = 0x5039A0;
 __int64 offWindowProcedure = 0x2F853C0;
+__int64 offGetWindowHandle = 0xF6FF10;
+__int64 offonBeginFrame = 0x503B10;
 
 //D3D
 __int64 offGetD3DDevice = 0x2F5A530;

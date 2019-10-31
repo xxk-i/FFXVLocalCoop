@@ -63,6 +63,9 @@
     <ClInclude Include="D3D11Display.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Black.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

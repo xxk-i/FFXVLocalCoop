@@ -9,6 +9,7 @@
 #include <d3d11.h>
 
 #include "D3D11Display.h"
+#include "Black.h"
 
 #pragma once
 
@@ -22,6 +23,7 @@ namespace Hooks
 	_Release pRelease = NULL;
 	_onEndFrame ponEndFrame = NULL;
 	_WindowProcedure pWindowProcedure = NULL;
+	_onBeginFrame ponBeginFrame = NULL;
 
 	bool g_isGUIInitialized = false;
 	bool g_showMenu = false;
@@ -74,6 +76,12 @@ namespace Hooks
 		DisplayOffsetButton((__int64)FunctionImports::fnSetMouseCursorVisible, "SetMouseCursorVisible");
 		DisplayOffsetButton((__int64)FunctionImports::fnSetController, "SetController");
 		ImGui::End();
+	}
+
+	void hkonBeginFrame(BlackMain main)
+	{
+		main.mouseCursorVisibleState_ = MOUSECURSOR_VISIBLE;
+		ponBeginFrame(main);
 	}
 
 	//D3D11::Present() equivalent
@@ -153,14 +161,14 @@ namespace Hooks
 				//Enable
 				if (!g_showMenu)
 				{
-					FunctionImports::fnSetMouseCursorVisible(true);
+					MH_EnableHook(FunctionImports::fnonBeginFrame);
 					g_showMenu = true;
 				}
 				
 				//Disable
 				else if (g_showMenu)
 				{
-					FunctionImports::fnSetMouseCursorVisible(false);
+					MH_DisableHook(FunctionImports::fnonBeginFrame);
 					g_showMenu = false;
 				}
 			}
@@ -183,6 +191,7 @@ namespace Hooks
 
 		//Hook Creation
 		MH_CreateHook(FunctionImports::fnSetUserControlActor, &hkSetUserControlActor, reinterpret_cast<LPVOID*>(&pSetUserControlActor));
+		MH_CreateHook(FunctionImports::fnonBeginFrame, &hkonBeginFrame, reinterpret_cast<LPVOID*>(&ponBeginFrame));
 		MH_CreateHook(FunctionImports::fnonEndFrame, &hkonEndFrame, reinterpret_cast<LPVOID*>(&ponEndFrame));
 		MH_CreateHook(FunctionImports::fnWindowProcedure, &hkWindowProcedure, reinterpret_cast<LPVOID*>(&pWindowProcedure));
 		//MH_CreateHook(FunctionImports::fnSetMouseCursorVisible, &hkSetMouseCursorVisible, reinterpret_cast<LPVOID*>(&pSetMouseCursorVisible));

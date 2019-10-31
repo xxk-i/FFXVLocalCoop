@@ -1,8 +1,11 @@
 #pragma once
 
+#include "FunctionOffsets.h"
+
 #include "ActorManager.h"
 #include "ActorPadControlComponent.h"
-#include "FunctionOffsets.h"
+#include "Black.h"
+
 #include <d3d11.h>
 #include "D3D11Display.h"
 
@@ -25,9 +28,11 @@ typedef __int64(__fastcall * _SetMouseCursorVisible)(bool visible);
 typedef ID3D11Device*(__fastcall * _GetD3DDevice)();
 typedef ID3D11DeviceContext*(__fastcall * _GetD3DDeviceContext)();
 typedef ID3D11DeviceContext*(__fastcall * _GetD3DDeviceImmediateContext)();
+typedef void(__fastcall * _onBeginFrame)(BlackMain BlackMain);
 typedef void(__fastcall * _onEndFrame)(D3D11Display* display, ID3D11DeviceContext* context);
 typedef __int64(__fastcall * _WindowProcedure)(HWND__ *hWnd, unsigned int msg, unsigned __int64 wParam, __int64 lParam);
-typedef void(__fastcall * _SetMouseCursorState)(__int64 thing, bool state);
+typedef void(__fastcall * _SetMouseCursorState)(HWND__ *hWnd, bool state);
+typedef HWND(__fastcall * _GetWindowHandle)();
 
 //Unused test functions I used to find the SwapChain::Present() method implementation
 typedef void(__fastcall * _OnSwap)();
@@ -57,7 +62,10 @@ namespace FunctionImports
 	_GetD3DDeviceImmediateContext fnGetD3DDeviceImmediateContext = (_GetD3DDeviceImmediateContext)(modBase + offGetD3DDeviceImmediateContext);
 	_OnSwap fnOnSwap = (_OnSwap)(modBase + offOnSwap);
 	_Release fnRelease = (_Release)(modBase + offRelease);
+	_onBeginFrame fnonBeginFrame = (_onBeginFrame)(modBase + offonBeginFrame);
 	_onEndFrame	fnonEndFrame = (_onEndFrame)(modBase + offonEndFrame);
 	_SetMouseCursorVisible fnSetMouseCursorVisible = (_SetMouseCursorVisible)(modBase + offSetMouseCursorVisible);
 	_WindowProcedure fnWindowProcedure = (_WindowProcedure)(modBase + offWindowProcedure);
+	_SetMouseCursorState fnSetMouseCursorState = (_SetMouseCursorState)(modBase + offSetMouseCursorState);
+	_GetWindowHandle fnGetWindowHandle = (_GetWindowHandle)(modBase + offGetWindowHandle);
 }
