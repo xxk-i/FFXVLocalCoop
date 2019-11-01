@@ -58,13 +58,14 @@ namespace Hooks
 		char buttonText[50];
 		sprintf(buttonText, "Copy%s%p", "##", fnOffset);
 
-		ImGui::InputText(name, offCursorText, sizeof(offCursorText), ImGuiInputTextFlags_ReadOnly);
-		ImGui::SameLine();
-
 		if (ImGui::Button(buttonText))
 		{
 			ImGui::SetClipboardText(offCursorText);
 		}
+		ImGui::SameLine();
+
+		ImGui::InputText(name, offCursorText, sizeof(offCursorText), ImGuiInputTextFlags_ReadOnly);
+		ImGui::PushItemWidth(175.0);
 		ImGui::SameLine();
 
 		ImGui::NewLine();
@@ -75,8 +76,12 @@ namespace Hooks
 		ImGui::Begin("Offsets");
 		DisplayOffsetButton((__int64)FunctionImports::fnSetMouseCursorVisible, "SetMouseCursorVisible");
 		DisplayOffsetButton((__int64)FunctionImports::fnSetController, "SetController");
+		DisplayOffsetButton((__int64)FunctionImports::fnonBeginFrame, "onBeginFrame");
+		DisplayOffsetButton((__int64)FunctionImports::fnRelease, "Party::Release");
+		DisplayOffsetButton((__int64)FunctionImports::fnActorPadControlComponent, "ActorPadCOntrolComponent");
+		DisplayOffsetButton((__int64)FunctionImports::fnGetActorManagerInstance, "GetActorManagerInstace");
 		ImGui::End();
-	}
+	} 
 
 	void hkonBeginFrame(BlackMain main)
 	{
@@ -144,7 +149,6 @@ namespace Hooks
 	}
 
 	//This hook routes input to the ImGui window
-	//TODO automatically handle mouse cursor visibility, disable game control
 	__int64 hkWindowProcedure(HWND__ *hWnd, unsigned int msg, WPARAM wParam, LPARAM lParam)
 	{
 		ImGuiIO& io = ImGui::GetIO();

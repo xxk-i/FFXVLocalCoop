@@ -44,7 +44,6 @@ int MainLoop()
 		return -1;
 	}
 	
-
 	while (true)
 	{
 		if (GetAsyncKeyState(VK_INSERT))
