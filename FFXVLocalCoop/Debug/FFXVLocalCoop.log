@@ -1,5 +1,0 @@
-﻿dllmain.obj : error LNK2019: unresolved external symbol _MH_Initialize@0 referenced in function "void __cdecl MainLoop(void)" (?MainLoop@@YAXXZ)
-dllmain.obj : error LNK2019: unresolved external symbol _MH_CreateHook@12 referenced in function "void __cdecl MainLoop(void)" (?MainLoop@@YAXXZ)
-dllmain.obj : error LNK2019: unresolved external symbol _MH_EnableHook@4 referenced in function "void __cdecl MainLoop(void)" (?MainLoop@@YAXXZ)
-bin\MinHook.x64.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
-C:\Users\xxk_.LINK\source\repos\FFXVLocalCoop\Debug\FFXVLocalCoop.dll : fatal error LNK1120: 3 unresolved externals

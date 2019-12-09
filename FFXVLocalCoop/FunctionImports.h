@@ -2,6 +2,7 @@
 
 #include "FunctionOffsets.h"
 
+#include "Actor.h"
 #include "ActorManager.h"
 #include "ActorPadControlComponent.h"
 #include "Black.h"
@@ -18,8 +19,9 @@ typedef void*(__fastcall * _GetActorFromIndex)(uintptr_t ActorTypeManager, int i
 typedef void(__fastcall * _StartArmedForm)(uintptr_t Individuality, bool iEnableEffect, bool eventMode);
 typedef void(__fastcall * _UpdateHolyState)(uintptr_t IndividualityNoctis, bool bForceEnd);
 typedef void(__fastcall * _ActorPadControlComponent)(ActorPadControlComponent* ActorPadControlComponent, Actor* pOwnerActor);
-typedef ActorManager*(__fastcall * _GetActorManagerInstance)();
-typedef void*(__fastcall * _GetBuddyActor)(int buddyType);
+typedef ActorManager(__fastcall * _GetActorManagerInstance)();
+typedef Individuality*(__fastcall * _GetIndividuality)(Actor* pActor);
+typedef Actor*(__fastcall * _GetBuddyActor)(int buddyType);
 typedef void(__fastcall * _DefaultPrintFunction)(int, const char* format);
 typedef void(__fastcall * _SetController)(__int64 *ActorControllerComponent, int CONTROLLERT_TYPE, __int64 *pIControllerInterface);
 typedef void(__fastcall * _GetActorControllerComponent)(__int64 *ActorControl);
@@ -33,6 +35,11 @@ typedef void(__fastcall * _onEndFrame)(D3D11Display* display, ID3D11DeviceContex
 typedef __int64(__fastcall * _WindowProcedure)(HWND__ *hWnd, unsigned int msg, unsigned __int64 wParam, __int64 lParam);
 typedef void(__fastcall * _SetMouseCursorState)(HWND__ *hWnd, bool state);
 typedef HWND(__fastcall * _GetWindowHandle)();
+typedef void(__fastcall * _ChangeControllerType)(ActorControllerComponent* ControllerComponent, CONTROLLER_TYPE type);
+typedef PlayerChangeManager*(__fastcall * _GetPlayerChangeManager)();
+typedef void(__fastcall * _PadControlIsPushed)(void* ActorPadControlComponent, int command, float maxTime);
+typedef void(__fastcall * _UpdateController)(void* actorControl, void* deltaTime);
+typedef bool(__fastcall * _SetUserControlStatus)(void* actorControl, CATEGORY user_control_category, bool set_user_control_status);
 
 //Unused test functions I used to find the SwapChain::Present() method implementation
 typedef void(__fastcall * _OnSwap)();
@@ -68,4 +75,10 @@ namespace FunctionImports
 	_WindowProcedure fnWindowProcedure = (_WindowProcedure)(modBase + offWindowProcedure);
 	_SetMouseCursorState fnSetMouseCursorState = (_SetMouseCursorState)(modBase + offSetMouseCursorState);
 	_GetWindowHandle fnGetWindowHandle = (_GetWindowHandle)(modBase + offGetWindowHandle);
+	_GetIndividuality fnGetIndividuality = (_GetIndividuality)(modBase + offGetIndividuality);
+	_ChangeControllerType fnChangeControllerType = (_ChangeControllerType)(modBase + offChangeControllerType);
+	_GetPlayerChangeManager fnGetPlayerChangeManager = (_GetPlayerChangeManager)(modBase + offGetPlayerChangeManager);
+	_PadControlIsPushed fnIsPushed = (_PadControlIsPushed)(modBase + offIsPushed);
+	_UpdateController fnUpdateController = (_UpdateController)(modBase + offUpdateController);
+	_SetUserControlStatus fnSetUserControlStatus = (_SetUserControlStatus)(modBase + offSetUserControlStatus);
 }

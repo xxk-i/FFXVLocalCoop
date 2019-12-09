@@ -1,0 +1,2 @@
+EXPORTS
+D3D11CreateDevice=Proxy_D3D11CreateDevice @3

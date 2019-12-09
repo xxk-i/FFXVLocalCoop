@@ -24,6 +24,7 @@ namespace Hooks
 	_onEndFrame ponEndFrame = NULL;
 	_WindowProcedure pWindowProcedure = NULL;
 	_onBeginFrame ponBeginFrame = NULL;
+	_UpdateController pUpdateController = NULL;
 
 	bool g_isGUIInitialized = false;
 	bool g_showMenu = false;
@@ -48,6 +49,8 @@ namespace Hooks
 		pSetUserControlActor(ActorManager, actor, bChangePadType, bDebugPad, bSave);
 	}
 
+	//This will display a row in the offsets window of this format:
+	// [Copy] [0xFunctionOffset] Name
 	void DisplayOffsetButton(__int64 fnOffset, const char name[])
 	{
 		char offCursorText[50];
@@ -64,6 +67,7 @@ namespace Hooks
 		}
 		ImGui::SameLine();
 
+		//TODO Fix first input text field not being affected by PushItemWidth
 		ImGui::InputText(name, offCursorText, sizeof(offCursorText), ImGuiInputTextFlags_ReadOnly);
 		ImGui::PushItemWidth(175.0);
 		ImGui::SameLine();
@@ -71,7 +75,7 @@ namespace Hooks
 		ImGui::NewLine();
 	}
 
-	void ShowGuiButton()
+	void ShowOffsetsWindow()
 	{
 		ImGui::Begin("Offsets");
 		DisplayOffsetButton((__int64)FunctionImports::fnSetMouseCursorVisible, "SetMouseCursorVisible");
@@ -79,9 +83,12 @@ namespace Hooks
 		DisplayOffsetButton((__int64)FunctionImports::fnonBeginFrame, "onBeginFrame");
 		DisplayOffsetButton((__int64)FunctionImports::fnRelease, "Party::Release");
 		DisplayOffsetButton((__int64)FunctionImports::fnActorPadControlComponent, "ActorPadCOntrolComponent");
-		DisplayOffsetButton((__int64)FunctionImports::fnGetActorManagerInstance, "GetActorManagerInstace");
+		DisplayOffsetButton((__int64)FunctionImports::fnGetActorManagerInstance, "GetActoidarManagerInstace");
+		DisplayOffsetButton((__int64)FunctionImports::fnSetUserControlActor, "SetUserControlActor");
+		DisplayOffsetButton((__int64)FunctionImports::fnIsPushed, "PadControl::IsPushed");
+		DisplayOffsetButton((__int64)FunctionImports::fnUpdateController, "UpdateController");
 		ImGui::End();
-	} 
+	}
 
 	void hkonBeginFrame(BlackMain main)
 	{
@@ -114,21 +121,19 @@ namespace Hooks
 			g_isGUIInitialized = true;
 		}
 
-		// Start the Dear ImGui frame
-
 		if (g_showMenu)
 		{
 			ImGui_ImplDX11_NewFrame();
 			ImGui_ImplWin32_NewFrame();
 			ImGui::NewFrame();
 
-			ShowGuiButton();
+			ShowOffsetsWindow();
 
-			//TODO move main window to its own function
+			//TODO move all window code to its own place
 			ImGui::Begin("FFXV Local Co-op Debug Info");
 			ImGui::SetWindowSize(ImVec2(400.00f, 400.00f));
 			ImGui::Text("Test");
-			
+
 			if (ImGui::BeginMenu("Help"))
 			{
 				if (ImGui::MenuItem("Info"))
@@ -198,13 +203,14 @@ namespace Hooks
 		MH_CreateHook(FunctionImports::fnonBeginFrame, &hkonBeginFrame, reinterpret_cast<LPVOID*>(&ponBeginFrame));
 		MH_CreateHook(FunctionImports::fnonEndFrame, &hkonEndFrame, reinterpret_cast<LPVOID*>(&ponEndFrame));
 		MH_CreateHook(FunctionImports::fnWindowProcedure, &hkWindowProcedure, reinterpret_cast<LPVOID*>(&pWindowProcedure));
+		//MH_CreateHook(FunctionImports::fnUpdateController, &hkUpdateController, reinterpret_cast<LPVOID*>(&pUpdateController));
 		//MH_CreateHook(FunctionImports::fnSetMouseCursorVisible, &hkSetMouseCursorVisible, reinterpret_cast<LPVOID*>(&pSetMouseCursorVisible));
 
 		//Activation
-		if (MH_EnableHook(FunctionImports::fnSetUserControlActor) != MH_OK)
-		{
-			return -1;
-		}
+		//if (MH_EnableHook(FunctionImports::fnSetUserControlActor) != MH_OK)
+		//{
+			//return -1;
+		//}
 
 		if (MH_EnableHook(FunctionImports::fnonEndFrame) != MH_OK)
 		{

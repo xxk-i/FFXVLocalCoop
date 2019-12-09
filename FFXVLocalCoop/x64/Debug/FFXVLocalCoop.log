@@ -1,7 +1,8 @@
 ﻿  dllmain.cpp
-c:\users\xxk_.link\source\repos\ffxvlocalcoop-minhook\ffxvlocalcoop\functionhooks.h(40): warning C4312: 'type cast': conversion from 'int' to 'LPCWSTR' of greater size
-c:\users\xxk_.link\source\repos\ffxvlocalcoop-minhook\ffxvlocalcoop\functionhooks.h(54): warning C4477: 'sprintf' : format string '%p' requires an argument of type 'void *', but variadic argument 1 has type '__int64'
-c:\users\xxk_.link\source\repos\ffxvlocalcoop-minhook\ffxvlocalcoop\functionhooks.h(59): warning C4477: 'sprintf' : format string '%p' requires an argument of type 'void *', but variadic argument 2 has type '__int64'
-c:\users\xxk_.link\source\repos\ffxvlocalcoop-minhook\ffxvlocalcoop\functionhooks.h(159): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
-c:\users\xxk_.link\source\repos\ffxvlocalcoop-minhook\ffxvlocalcoop\functionhooks.h(160): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
+c:\users\xxk_.link\source\repos\ffxvlocalcoop-minhook\ffxvlocalcoop\functionhooks.h(41): warning C4312: 'type cast': conversion from 'int' to 'LPCWSTR' of greater size
+c:\users\xxk_.link\source\repos\ffxvlocalcoop-minhook\ffxvlocalcoop\functionhooks.h(57): warning C4477: 'sprintf' : format string '%p' requires an argument of type 'void *', but variadic argument 1 has type '__int64'
+c:\users\xxk_.link\source\repos\ffxvlocalcoop-minhook\ffxvlocalcoop\functionhooks.h(62): warning C4477: 'sprintf' : format string '%p' requires an argument of type 'void *', but variadic argument 2 has type '__int64'
+c:\users\xxk_.link\source\repos\ffxvlocalcoop-minhook\ffxvlocalcoop\functionhooks.h(163): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
+c:\users\xxk_.link\source\repos\ffxvlocalcoop-minhook\ffxvlocalcoop\functionhooks.h(164): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
+     Creating library C:\Users\xxk_.LINK\source\repos\FFXVLocalCoop-Minhook\x64\Debug\FFXVLocalCoop.lib and object C:\Users\xxk_.LINK\source\repos\FFXVLocalCoop-Minhook\x64\Debug\FFXVLocalCoop.exp
   FFXVLocalCoop.vcxproj -> C:\Users\xxk_.LINK\source\repos\FFXVLocalCoop-Minhook\x64\Debug\FFXVLocalCoop.dll

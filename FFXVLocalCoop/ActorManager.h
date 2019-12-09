@@ -120,7 +120,8 @@ struct ActorManager
 	char actorLodUpdater_[224];
 	char deleteActorList_[16];
 	char deleteActorListMutex_[48];
-	Mutex lockMutex_;
+	///Mutex lockMutex_;
+	char lockMutex_[0x30];
 	Actor* userControlActor_;
 	Actor* userControlPlayer_;
 	Actor* userControlVehicle_;
